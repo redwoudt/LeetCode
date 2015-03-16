@@ -1,0 +1,28 @@
+class Solution {
+private:
+    int findMin(vector<int> &num, int left, int right){
+        if (num.empty()) return -1;
+        if (left > right) return -1;
+        if (right > num.size() -1) return -1;
+        if (left < 0) return -1;
+        
+        if (left == right) return num[left];
+        
+        int middle = (right+left)/2;
+        if (num[left]<= num[middle]){
+            if (num[right]>num[middle]){
+                return num[left];
+            }
+            else{
+                return findMin(num, middle+1, right);
+            }
+        }
+        else{
+            return findMin(num, left+1, middle);
+        }
+    }
+public:
+    int findMin(vector<int> &num) {
+        return findMin(num, 0, num.size()-1);
+    }
+};
