@@ -1,0 +1,51 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        if (s.empty()) return true;
+        if (s.size() == 1) return false;
+        
+        stack <char> note;
+        
+        for (int i = 0; i < s.size(); i++){
+            switch (s[i]){
+                case '(':
+                case '{':
+                case '[':
+                    note.push(s[i]);
+                    break;
+                case ')':
+                    if (note.empty() || note.top() != '('){
+                        return false;
+                    }
+                    else{
+                        note.pop();
+                    }
+                    break;
+                case '}':
+                    if (note.empty() || note.top() != '{'){
+                        return false;
+                    }
+                    else{
+                        note.pop();
+                    }
+                    break;
+                case ']':
+                    if (note.empty() || note.top() != '['){
+                        return false;
+                    }
+                    else{
+                        note.pop();
+                    }
+                    break;
+                default:
+                 return false;
+            }
+        }
+        
+        if (!note.empty()){
+            return false;
+        }
+        
+        return true;
+    }
+};
